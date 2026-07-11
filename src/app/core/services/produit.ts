@@ -35,4 +35,8 @@ export class ProductService {
       .slice(0, 8);
   }
 
+  getProductsByCategory(slug: string): Product[] {
+    return PRODUCTS_MOCK.filter((product) => product.categorie.toLowerCase() === slug.toLowerCase());
+  }
+
 }
