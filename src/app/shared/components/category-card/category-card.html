@@ -1,0 +1,29 @@
+<a
+  *ngIf="category"
+  [href]="category.link || '#'"
+  class="group block overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+>
+  <div class="relative h-48 overflow-hidden bg-gray-100">
+    <img
+      *ngIf="category.image"
+      [src]="category.image"
+      [alt]="category.name"
+      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+    />
+    <div
+      *ngIf="!category.image"
+      class="flex h-full items-center justify-center bg-gradient-to-br from-[#F59E0B]/10 to-[#111827]/5 text-sm font-semibold uppercase tracking-[0.2em] text-gray-500"
+    >
+      {{ category.name }}
+    </div>
+  </div>
+
+  <div class="space-y-2 p-5">
+    <h3 class="text-lg font-semibold text-[#111827] transition-colors duration-300 group-hover:text-[#F59E0B]">
+      {{ category.name }}
+    </h3>
+    <p *ngIf="category.description" class="text-sm leading-relaxed text-gray-500">
+      {{ category.description }}
+    </p>
+  </div>
+</a>

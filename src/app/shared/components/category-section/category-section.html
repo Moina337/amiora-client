@@ -1,0 +1,14 @@
+<section class="category-section">
+  <div class="category-section__header" *ngIf="title || subtitle">
+    <h2 *ngIf="title">{{ title }}</h2>
+    <p *ngIf="subtitle">{{ subtitle }}</p>
+  </div>
+
+  <div class="category-section__list" *ngIf="categories?.length; else emptyState">
+    <app-category-card *ngFor="let category of categories" [category]="toCategoryCardItem(category)"></app-category-card>
+  </div>
+
+  <ng-template #emptyState>
+    <p class="category-section__empty">{{ emptyMessage }}</p>
+  </ng-template>
+</section>

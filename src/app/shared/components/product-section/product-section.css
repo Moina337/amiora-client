@@ -1,0 +1,14 @@
+.product-section {
+  margin: 1.5rem 0;
+}
+
+.product-section__list {
+  display: grid;
+  gap: 1rem;
+}
+
+.product-section__item {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+}

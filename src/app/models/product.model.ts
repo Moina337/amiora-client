@@ -1,0 +1,23 @@
+export interface Product {
+
+  id: number;
+
+  nom: string;
+
+  description: string;
+
+  prix: number;
+
+  prixPromotion?: number;
+
+  imageUrl: string;
+
+  categorie: string;
+
+  estEnVedette: boolean;
+
+  nombreVentes: number;
+
+  dateCreation: Date;
+
+}
