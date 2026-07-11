@@ -11,6 +11,7 @@ import { CategoryCardComponent, CategoryCardItem } from '../category-card/catego
   templateUrl: './category-section.html',
   styleUrl: './category-section.css',
 })
+
 export class CategorySectionComponent {
   @Input() title = 'Catégories';
   @Input() subtitle = '';
