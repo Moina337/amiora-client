@@ -1,0 +1,10 @@
+<div class="flex flex-col gap-1">
+  @for (badge of badges; track badge.label) {
+    <span
+      class="px-2 py-0.5 rounded-full font-semibold shadow-sm"
+      [class]="size === 'lg' ? 'text-xs sm:text-sm' : 'text-[10px] sm:text-xs'"
+      [ngClass]="badge.className">
+      {{ badge.label }}
+    </span>
+  }
+</div>

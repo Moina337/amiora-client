@@ -1,13 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 
 import { Product } from '../../../../models/product.model';
 import { ProductUtils } from '../../../../shared/components/utils/product.utils'; 
+import { ProductPrice } from '../../../../shared/components/product-price/product-price';
+import { ProductRating } from '../../../../shared/components/product-rating/product-rating';
+import { ProductBadges } from '../../../../shared/components/product-badges/product-badges';
+import { FavoriteButton } from '../../../../shared/components/favorite-button/favorite-button';
+import { RouterLink } from '@angular/router';
+import { AddToCartButton } from '../../../../shared/components/add-to-cart-button/add-to-cart-button';
+import { Panier } from '../../../../core/services/panier';
 
 @Component({
   selector: 'app-product-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ProductPrice, ProductBadges, ProductRating, FavoriteButton, RouterLink, AddToCartButton],
   templateUrl: './product-card.html',
   styleUrl: './product-card.css',
 })
@@ -22,8 +29,11 @@ export class ProductCard {
   @Output()
   toggleFavorite = new EventEmitter<Product>();
 
-  onAddToCart() {
-    this.addToCart.emit(this.product);
+  private panier = inject(Panier);
+
+ onAddToCart() {
+    this.panier.ajouter(this.product); // ← vraie logique
+    this.addToCart.emit(this.product); // ← on garde l'event pour compatibilité
   }
 
   onFavorite() {
@@ -52,6 +62,6 @@ export class ProductCard {
 
   get badges() {
     return ProductUtils.getBadges(this.product);
-}
+  }
 
 }

@@ -1,0 +1,101 @@
+<div class="bg-white rounded-2xl border border-gray-200 p-6 mt-8">
+
+    <h2 class="text-xl font-bold text-gray-900">
+
+        Mode de commande
+
+    </h2>
+
+    <p class="text-sm text-gray-500 mt-1">
+
+        Choisissez la manière dont vous souhaitez finaliser votre commande.
+
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-5 mt-6">
+
+        <!-- WhatsApp -->
+
+        <div
+            (click)="select('WHATSAPP')"
+            class="cursor-pointer rounded-2xl border-2 p-5 transition-all duration-200"
+            [class.border-green-500]="selectedMethod === 'WHATSAPP'"
+            [class.bg-green-50]="selectedMethod === 'WHATSAPP'"
+            [class.border-gray-200]="selectedMethod !== 'WHATSAPP'">
+
+            <div class="flex items-center justify-between">
+
+                <div>
+
+                    <h3 class="font-bold text-lg">
+
+                        🟢 WhatsApp
+
+                    </h3>
+
+                    <p class="text-sm text-gray-500 mt-2">
+
+                        Finalisez votre commande directement avec notre équipe via WhatsApp.
+
+                    </p>
+
+                </div>
+
+                @if(selectedMethod === 'WHATSAPP'){
+
+                    <span class="text-green-600 text-2xl">
+
+                        ✓
+
+                    </span>
+
+                }
+
+            </div>
+
+        </div>
+
+        <!-- Paiement livraison -->
+
+        <div
+            (click)="select('PAY_ON_DELIVERY')"
+            class="cursor-pointer rounded-2xl border-2 p-5 transition-all duration-200"
+            [class.border-amber-500]="selectedMethod === 'PAY_ON_DELIVERY'"
+            [class.bg-amber-50]="selectedMethod === 'PAY_ON_DELIVERY'"
+            [class.border-gray-200]="selectedMethod !== 'PAY_ON_DELIVERY'">
+
+            <div class="flex items-center justify-between">
+
+                <div>
+
+                    <h3 class="font-bold text-lg">
+
+                        🚚 Paiement à la livraison
+
+                    </h3>
+
+                    <p class="text-sm text-gray-500 mt-2">
+
+                        Payez uniquement lorsque vous recevez votre commande.
+
+                    </p>
+
+                </div>
+
+                @if(selectedMethod === 'PAY_ON_DELIVERY'){
+
+                    <span class="text-amber-600 text-2xl">
+
+                        ✓
+
+                    </span>
+
+                }
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,35 +1,117 @@
-<section class="min-h-screen bg-[#F9FAFB] px-4 py-12 sm:px-6 lg:px-8">
-  <div class="mx-auto flex max-w-6xl flex-col overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm lg:flex-row">
-    <div class="flex-1 p-8 sm:p-10 lg:p-12">
-      <div class="mb-4 inline-flex items-center rounded-full border border-[#F59E0B]/20 bg-[#F59E0B]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[#F59E0B]">
-        Catégorie
-      </div>
-      <h1 class="text-3xl font-black uppercase tracking-tight text-[#111827] sm:text-4xl">
-        {{ nom }}
-      </h1>
-      <p class="mt-4 max-w-2xl text-base leading-relaxed text-gray-600">
-        {{ description }}
-      </p>
-      <div class="mt-6 flex flex-wrap items-center gap-4 text-sm text-gray-500">
-        <span class="rounded-full bg-gray-100 px-3 py-1 font-medium">
-          {{ nombreProduits }} produits
-        </span>
+<section class="min-h-screen bg-[#F9FAFB] px-4 py-8 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-7xl">
+    <nav class="mb-6 flex flex-wrap items-center gap-2 text-sm text-gray-500">
+      <a routerLink="/" class="transition hover:text-gray-900">Accueil</a>
+      <span>/</span>
+      <a routerLink="/shop" class="transition hover:text-gray-900">Catégories</a>
+      <span>/</span>
+      <span class="font-medium text-gray-900">{{ nom }}</span>
+    </nav>
+
+    <div class="overflow-hidden rounded-[2rem] border border-gray-200 bg-white shadow-[0_20px_60px_-30px_rgba(15,23,42,0.35)]">
+      <div class="grid lg:grid-cols-[1.1fr_0.9fr]">
+        <div class="p-8 sm:p-10 lg:p-12">
+          <div class="mb-5 inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.25em] text-amber-600">
+            Collection {{ nom }}
+          </div>
+
+          <h1 class="text-3xl font-black uppercase tracking-tight text-gray-900 sm:text-4xl">
+            {{ nom }}
+          </h1>
+
+          <p class="mt-4 max-w-2xl text-base leading-7 text-gray-600">
+            {{ description }}
+          </p>
+
+          <div class="mt-6 flex flex-wrap items-center gap-3 text-sm text-gray-600">
+            <span class="rounded-full bg-gray-100 px-3 py-1 font-medium text-gray-700">
+              {{ nombreProduits }} produits
+            </span>
+            <span class="rounded-full border border-gray-200 px-3 py-1">
+              Livraison rapide
+            </span>
+            <span class="rounded-full border border-gray-200 px-3 py-1">
+              Paiement sécurisé
+            </span>
+          </div>
+        </div>
+
+        <div class="relative min-h-[280px] bg-gradient-to-br from-gray-900 via-slate-800 to-gray-700 lg:min-h-full">
+          <img
+            *ngIf="imageUrl"
+            [src]="imageUrl"
+            [alt]="nom"
+            class="h-full w-full object-cover"
+          />
+          <div
+            *ngIf="!imageUrl"
+            class="flex h-full min-h-[280px] items-center justify-center text-sm font-semibold uppercase tracking-[0.3em] text-white/80"
+          >
+            Image de la catégorie
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="flex items-center justify-center bg-gradient-to-br from-[#111827] via-[#1F2937] to-[#374151] p-6 sm:p-8 lg:min-h-[320px] lg:w-[360px]">
-      <img
-        *ngIf="imageUrl"
-        [src]="imageUrl"
-        [alt]="nom"
-        class="h-56 w-full rounded-2xl object-cover shadow-lg"
-      />
-      <div
-        *ngIf="!imageUrl"
-        class="flex h-56 w-full items-center justify-center rounded-2xl border border-white/10 bg-white/10 text-sm font-semibold uppercase tracking-[0.3em] text-white/80"
-      >
-        Aucune image
+    <div class="mt-8 flex flex-col gap-4 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+      <div class="flex flex-wrap items-center gap-2 text-sm text-gray-600">
+        <span class="font-semibold text-gray-900">Trier par :</span>
+        @for (option of sortOptions; track option.value) {
+          <button
+            type="button"
+            (click)="onSortChange(option.value)"
+            class="rounded-full border px-3 py-2 transition"
+            [ngClass]="selectedSort === option.value ? 'border-gray-900 bg-gray-900 text-white' : 'border-gray-200 text-gray-600 hover:border-gray-900 hover:text-gray-900'"
+          >
+            {{ option.label }}
+          </button>
+        }
       </div>
+
+      <div class="text-sm text-gray-500">
+        {{ nombreProduits }} articles disponibles
+      </div>
+    </div>
+
+    @if (hasProducts) {
+      <div class="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        @for (product of displayedProducts; track product.id) {
+          <app-product-card [product]="product"></app-product-card>
+        }
+      </div>
+    } @else {
+      <div class="mt-8 rounded-2xl border border-dashed border-gray-300 bg-white p-10 text-center text-gray-500">
+        Aucun produit n’est disponible dans cette catégorie pour le moment.
+      </div>
+    }
+
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
+      <button
+        type="button"
+        (click)="goToPage(currentPage - 1)"
+        class="rounded-full border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-700 transition hover:border-gray-900 hover:text-gray-900"
+      >
+        Précédent
+      </button>
+
+      @for (page of pages; track page) {
+        <button
+          type="button"
+          (click)="goToPage(page)"
+          class="h-10 w-10 rounded-full border text-sm font-semibold transition"
+          [ngClass]="page === currentPage ? 'border-gray-900 bg-gray-900 text-white' : 'border-gray-200 text-gray-700 hover:border-gray-900 hover:text-gray-900'"
+        >
+          {{ page }}
+        </button>
+      }
+
+      <button
+        type="button"
+        (click)="goToPage(currentPage + 1)"
+        class="rounded-full border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-700 transition hover:border-gray-900 hover:text-gray-900"
+      >
+        Suivant
+      </button>
     </div>
   </div>
 </section>

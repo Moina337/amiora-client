@@ -1,1 +1,79 @@
-<p>product-detail works!</p>
+@if (product) {
+  <div class="max-w-6xl mx-auto px-4 py-6 sm:py-10">
+
+      <app-breadcrumb [items]="breadcrumbItems"></app-breadcrumb>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+
+      <!-- GALERIE (image simple pour l'instant) -->
+      <div class="relative aspect-square bg-gray-100 rounded-2xl overflow-hidden">
+        <img [src]="product.imageUrl" [alt]="product.nom"
+          class="w-full h-full object-cover" />
+
+        <div class="absolute top-3 left-3">
+          <app-product-badges [badges]="badges" size="lg"></app-product-badges>
+        </div>
+
+        <div class="absolute top-3 right-3">
+          <app-favorite-button
+            [isFavorite]="isFavorite"
+            size="lg"
+            (toggle)="onFavorite()">
+          </app-favorite-button>
+        </div>
+      </div>
+
+      <!-- INFOS -->
+      <div>
+        <p class="text-xs sm:text-sm uppercase tracking-wider text-gray-400">
+          {{ product.categorie }}
+        </p>
+
+        <h1 class="mt-2 text-2xl sm:text-3xl font-bold text-gray-900">
+          {{ product.nom }}
+        </h1>
+
+        <div class="mt-3">
+          <app-product-rating [nombreAvis]="24" size="lg"></app-product-rating>
+        </div>
+
+        <div class="mt-5">
+          <app-product-price
+            [displayedPrice]="displayedPrice"
+            [originalPrice]="product.prix"
+            [hasPromotion]="hasPromotion"
+            size="lg">
+          </app-product-price>
+        </div>
+
+        <p class="mt-5 text-sm sm:text-base text-gray-600 leading-relaxed">
+          {{ product.description }}
+        </p>
+
+        <!-- Quantité -->
+        <div class="mt-6 flex items-center gap-4">
+          <span class="text-sm font-medium text-gray-700">Quantité</span>
+          <div class="flex items-center border border-gray-300 rounded-xl">
+            <button (click)="decreaseQuantite()"
+              class="w-9 h-9 flex items-center justify-center hover:bg-gray-100 transition">
+              −
+            </button>
+            <span class="w-10 text-center font-medium">{{ quantite }}</span>
+            <button (click)="increaseQuantite()"
+              class="w-9 h-9 flex items-center justify-center hover:bg-gray-100 transition">
+              +
+            </button>
+          </div>
+        </div>
+
+        <!-- Bouton panier -->
+        <app-add-to-cart-button size="sm"  (addToCart)="onAddToCart()"></app-add-to-cart-button>
+      </div>
+
+    </div>
+  </div>
+} @else {
+  <div class="max-w-6xl mx-auto px-4 py-20 text-center text-gray-500">
+    Produit introuvable.
+  </div>
+}

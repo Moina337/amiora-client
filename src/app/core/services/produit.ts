@@ -39,4 +39,8 @@ export class ProductService {
     return PRODUCTS_MOCK.filter((product) => product.categorie.toLowerCase() === slug.toLowerCase());
   }
 
+  getById(id: number): Product | undefined {
+  return PRODUCTS_MOCK.find(product => product.id === id);
+}
+
 }

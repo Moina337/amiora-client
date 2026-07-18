@@ -1,0 +1,10 @@
+<div class="flex items-center gap-1" [class]="size === 'lg' ? 'text-base' : 'text-xs sm:text-sm'">
+  <span class="text-amber-400">★★★★★</span>
+  <span class="text-gray-400">
+    @if (size === 'lg') {
+      ({{ nombreAvis }} avis)
+    } @else {
+      ({{ nombreAvis }})
+    }
+  </span>
+</div>

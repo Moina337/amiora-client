@@ -1,170 +1,59 @@
-<div
-  class="group bg-white rounded-2xl border border-gray-200 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+<div class="group bg-white rounded-2xl border border-gray-200 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
 
-  <!-- ========================= -->
   <!-- IMAGE -->
-  <!-- ========================= -->
-
   <div class="relative aspect-square bg-gray-100 overflow-hidden">
-
-    <img
-      [src]="product.imageUrl"
-      [alt]="product.nom"
+    <img [src]="product.imageUrl" [alt]="product.nom"
       class="w-full h-full object-cover transition duration-500 group-hover:scale-105" />
 
-    <!-- Badges -->
-
-    <div class="absolute top-3 left-3 flex flex-col gap-2">
-
-      @for (badge of badges; track badge.label) {
-
-      <span
-        class="px-3 py-1 rounded-full text-xs font-semibold shadow-sm"
-        [ngClass]="badge.className">
-
-        {{ badge.label }}
-
-      </span>
-
-      }
-
+    <div class="absolute top-2 left-2">
+      <app-product-badges [badges]="badges" size="sm"></app-product-badges>
     </div>
 
-    <!-- Favori -->
-
-    <button
-      (click)="onFavorite()"
-      class="absolute top-3 right-3 w-10 h-10 rounded-full bg-white/95 backdrop-blur shadow-md flex items-center justify-center transition hover:bg-red-50 hover:text-red-500">
-
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="w-5 h-5"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor">
-
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 20.364 4.318 12.682a4.5 4.5 0 010-6.364z"/>
-
-      </svg>
-
-    </button>
-
+    <div class="absolute top-2 right-2">
+      <app-favorite-button [isFavorite]="false" size="sm" (toggle)="onFavorite()"></app-favorite-button>
+    </div>
   </div>
 
-  <!-- ========================= -->
   <!-- CONTENU -->
-  <!-- ========================= -->
+  <div class="p-3 sm:p-4">
+    <p class="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400">{{ product.categorie }}</p>
 
-  <div class="p-5">
+    <h3 class="mt-1 text-sm sm:text-base font-semibold text-gray-900 line-clamp-1">{{ product.nom }}</h3>
 
-    <!-- Catégorie -->
-
-    <p class="text-xs uppercase tracking-widest text-gray-400">
-
-      {{ product.categorie }}
-
-    </p>
-
-    <!-- Nom -->
-
-    <h3
-      class="mt-2 text-lg font-semibold text-gray-900 line-clamp-2 min-h-[56px]">
-
-      {{ product.nom }}
-
-    </h3>
-
-    <!-- Description -->
-
-    <p
-      class="mt-2 text-sm text-gray-500 line-clamp-2 min-h-[40px]">
-
-      {{ product.description }}
-
-    </p>
-
-    <!-- Note -->
-
-    <div class="flex items-center gap-2 mt-4">
-
-      <div class="text-amber-400">
-
-        ★★★★★
-
-      </div>
-
-      <span class="text-sm text-gray-500">
-
-        (24 avis)
-
-      </span>
-
+    <div class="mt-1">
+      <app-product-rating [nombreAvis]="24" size="sm"></app-product-rating>
     </div>
 
-    <!-- Prix -->
-
-    <div class="mt-5">
-
-      @if(hasPromotion){
-
-      <div class="flex items-end gap-3">
-
-        <span
-          class="text-2xl font-bold text-red-600">
-
-          {{ displayedPrice | number }} FC
-
-        </span>
-
-        <span
-          class="text-sm line-through text-gray-400">
-
-          {{ product.prix | number }} FC
-
-        </span>
-
-      </div>
-
-      }
-
-      @else {
-
-      <span
-        class="text-2xl font-bold text-gray-900">
-
-        {{ displayedPrice | number }} FC
-
-      </span>
-
-      }
-
+    <div class="mt-2 sm:mt-3">
+      <app-product-price
+        [displayedPrice]="displayedPrice"
+        [originalPrice]="product.prix"
+        [hasPromotion]="hasPromotion"
+        size="sm">
+      </app-product-price>
     </div>
+    <!-- STOCK -->
+<div class="mt-2">
+  <p class="text-xs text-gray-500">
+    Stock :
+    <span
+      class="font-semibold"
+      [ngClass]="{
+        'text-green-600': product.quantite > 10,
+        'text-amber-600': product.quantite > 0 && product.quantite <= 10,
+        'text-red-600': product.quantite === 0
+      }">
+      {{ product.quantite }}
+    </span>
+  </p>
+</div>
 
-    <!-- Boutons -->
-
-    <div class="grid grid-cols-2 gap-3 mt-6">
-
-      <button
-        class="rounded-xl border border-gray-300 py-3 font-medium hover:bg-gray-100 transition">
-
+    <div class="grid grid-cols-2 gap-1.5 sm:gap-2 mt-3 sm:mt-4">
+      <a [routerLink]="['/produit', product.id]"
+        class="flex items-center justify-center rounded-lg sm:rounded-xl border border-gray-300 py-1.5 sm:py-2 text-xs sm:text-sm font-medium hover:bg-gray-100 transition">
         Voir
-
-      </button>
-
-      <button
-        (click)="onAddToCart()"
-        class="rounded-xl bg-amber-500 text-white py-3 font-semibold hover:bg-amber-600 transition">
-
-        Panier
-
-      </button>
-
+      </a>
+     <app-add-to-cart-button size="sm" (addToCart)="onAddToCart()"></app-add-to-cart-button>
     </div>
-
   </div>
-
 </div>

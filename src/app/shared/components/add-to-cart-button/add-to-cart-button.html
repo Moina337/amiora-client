@@ -1,0 +1,6 @@
+<button
+  (click)="onClick()"
+  class="w-full rounded-lg sm:rounded-xl bg-amber-500 text-white font-semibold hover:bg-amber-600 transition"
+  [class]="size === 'lg' ? 'py-3 text-sm sm:text-base' : 'py-1.5 sm:py-2 text-xs sm:text-sm'">
+  {{ label }}
+</button>

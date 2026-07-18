@@ -1,0 +1,15 @@
+:host{
+    display:block;
+}
+
+input,
+textarea,
+select{
+    transition:.2s;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:#f59e0b;
+}

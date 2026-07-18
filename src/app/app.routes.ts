@@ -1,9 +1,27 @@
 import { Routes } from '@angular/router';
 
+import { HomeComponent } from './features/home/home';
+import { ProductList } from './features/products/product-list/product-list';
+import { ProductDetail } from './features/products/product-detail/product-detail';
+import { Cart } from './features/cart/cart';
+import { Checkout } from './features/checkout/checkout';
+import { Login } from './features/auth/login/login';
+import { Register } from './features/auth/register/register';
+import { Dashboard } from './features/admin/dashboard/dashboard';
+import { CategoryPageComponent } from './features/category-page/category-page';
+import { Categories } from './features/categories/categories';
+
 export const routes: Routes = [
-  {
-    path: 'categories/:slug',
-    loadComponent: () =>
-      import('./features/category-page/category-page').then((m) => m.CategoryPageComponent),
-  },
+  { path: '', component: HomeComponent, pathMatch: 'full' },
+  { path: 'shop', component: ProductList },
+  { path: 'categories', component: Categories },
+  { path: 'produit/:id', component: ProductDetail },
+  { path: 'categories/:slug', component: CategoryPageComponent },
+  { path: 'categorie/:slug', component: CategoryPageComponent },
+  { path: 'panier', component: Cart }, // ← nouvelle ligne
+  { path: 'checkout', component: Checkout },
+  { path: 'connexion', component: Login },
+  { path: 'inscription', component: Register },
+  { path: 'admin', component: Dashboard },
+  { path: '**', redirectTo: '' },
 ];

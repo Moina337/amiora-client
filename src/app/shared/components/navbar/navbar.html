@@ -1,1 +1,29 @@
-<p>navbar works!</p>
+<header class="sticky top-0 z-30 bg-white border-b border-gray-200">
+  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+
+    <a routerLink="/" class="text-xl font-bold text-gray-900">
+      Amiora
+    </a>
+
+    <nav class="hidden sm:flex items-center gap-6 text-sm font-medium text-gray-600">
+      <a routerLink="/shop" class="hover:text-amber-600 transition">Boutique</a>
+      <a routerLink="/categories" class="hover:text-amber-600 transition">Catégories</a>
+    </nav>
+
+    <button (click)="ouvrirPanier()"
+      class="relative w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition">
+
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.436M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 1.998-4.756 2.615-7.324a1.125 1.125 0 00-1.109-1.328H5.106M14.25 17.25a1.125 1.125 0 11-2.25 0 1.125 1.125 0 012.25 0zm-6.75 0a1.125 1.125 0 11-2.25 0 1.125 1.125 0 012.25 0z" />
+      </svg>
+
+      @if (totalArticles() > 0) {
+        <span class="absolute -top-1 -right-1 bg-amber-500 text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center">
+          {{ totalArticles() }}
+        </span>
+      }
+    </button>
+
+  </div>
+</header>

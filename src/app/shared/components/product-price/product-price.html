@@ -1,0 +1,20 @@
+<div class="flex items-end gap-1.5 sm:gap-2 flex-wrap">
+  @if (hasPromotion) {
+    <span
+      [class]="size === 'lg' ? 'text-2xl sm:text-3xl' : 'text-base sm:text-xl'"
+      class="font-bold text-red-600">
+      {{ displayedPrice | number }} FC
+    </span>
+    <span
+      [class]="size === 'lg' ? 'text-sm' : 'text-[10px] sm:text-xs'"
+      class="line-through text-gray-400">
+      {{ originalPrice | number }} FC
+    </span>
+  } @else {
+    <span
+      [class]="size === 'lg' ? 'text-2xl sm:text-3xl' : 'text-base sm:text-xl'"
+      class="font-bold text-gray-900">
+      {{ displayedPrice | number }} FC
+    </span>
+  }
+</div>

@@ -1,0 +1,14 @@
+<button
+  (click)="onClick()"
+  class="rounded-full bg-white/95 backdrop-blur shadow-md flex items-center justify-center transition hover:bg-red-50 hover:text-red-500"
+  [class]="size === 'lg' ? 'w-11 h-11 sm:w-12 sm:h-12' : 'w-7 h-7 sm:w-8 sm:h-8'"
+  [class.text-red-500]="isFavorite">
+
+  <svg xmlns="http://www.w3.org/2000/svg"
+    [class]="size === 'lg' ? 'w-5 h-5 sm:w-6 sm:h-6' : 'w-3.5 h-3.5 sm:w-4 sm:h-4'"
+    [attr.fill]="isFavorite ? 'currentColor' : 'none'"
+    viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+      d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 20.364 4.318 12.682a4.5 4.5 0 010-6.364z"/>
+  </svg>
+</button>
