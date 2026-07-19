@@ -1,5 +1,5 @@
 import { Product } from "../../../models/product.model"; 
- import { ProductBadge } from "../../../models/product-badge.model"; 
+import { ProductBadge } from "../../../models/product-badge.model"; 
 
 export class ProductUtils {
 
@@ -54,49 +54,31 @@ export class ProductUtils {
     return product.estEnVedette;
   }
 
+  static getBadgeNouveau(): ProductBadge {
+    return { label: 'Nouveau', className: 'bg-emerald-500 text-white' };
+  }
+
  
 
-static getBadges(product: Product): ProductBadge[] {
+  static getBadgePromotion(product: Product): ProductBadge {
+    return { label: `-${this.reduction(product)}%`, className: 'bg-red-500 text-white' };
+  }
 
-    const badges: ProductBadge[] = [];
+  /**
+   * Badge unique par priorité : promotion > nouveau > vedette.
+   * Utilisé quand aucun contexte n'est imposé par la section.
+   */
+  static getBadges(product: Product): ProductBadge[] {
 
-    if (this.hasPromotion(product)) {
+  if (this.hasPromotion(product)) {
+    return [this.getBadgePromotion(product)];
+  }
 
-        badges.push({
+  if (this.isNew(product)) {
+    return [this.getBadgeNouveau()];
+  }
 
-            label: `-${this.reduction(product)}%`,
-
-            className: 'bg-red-500 text-white'
-
-        });
-
-    }
-
-    if (this.isNew(product)) {
-
-        badges.push({
-
-            label: 'Nouveau',
-
-            className: 'bg-emerald-500 text-white'
-
-        });
-
-    }
-
-    if (this.isFeatured(product)) {
-
-        badges.push({
-
-            label: 'Vedette',
-
-            className: 'bg-amber-500 text-white'
-
-        });
-
-    }
-
-    return badges;
+  return [];
 
 }
 

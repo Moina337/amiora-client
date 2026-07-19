@@ -143,7 +143,6 @@
     title="🔥 Produits en vedette"
     subtitle="La sélection exclusive Amiora."
     [products]="featuredProducts"
-    [metaText]="'Sélection'"
     containerClass="mb-16">
   </app-product-section>
 
@@ -151,9 +150,7 @@
     title="🆕 Nouveautés"
     subtitle="Fraîchement ajoutés à la collection."
     [products]="newProducts"
-    [metaText]="'Récent'"
-    badgeText="New"
-    badgeClass="bg-[#10B981] text-white"
+    context="nouveau"
     containerClass="mb-16 border-t border-gray-100 pt-12">
   </app-product-section>
 
@@ -161,7 +158,6 @@
     title="⭐ Meilleures ventes"
     subtitle="Les articles les plus plébiscités par notre communauté."
     [products]="bestSellers"
-    priceMode="sales"
     containerClass="mb-16 border-t border-gray-100 pt-12">
   </app-product-section>
 
@@ -169,9 +165,6 @@
     title="💰 Promotions"
     subtitle="Offres exclusives à durée limitée."
     [products]="promotions"
-    priceMode="promotion"
-    badgeText="Offre"
-    badgeClass="bg-[#EF4444] text-white"
     containerClass="border-t border-gray-100 pt-12">
   </app-product-section>
 </section>

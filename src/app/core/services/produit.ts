@@ -43,4 +43,10 @@ export class ProductService {
   return PRODUCTS_MOCK.find(product => product.id === id);
 }
 
+getSimilarProducts(product: Product, limit: number = 4): Product[] {
+  return PRODUCTS_MOCK
+    .filter(p => p.categorie === product.categorie && p.id !== product.id)
+    .slice(0, limit);
+}
+
 }

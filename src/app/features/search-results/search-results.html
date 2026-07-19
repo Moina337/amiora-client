@@ -1,0 +1,19 @@
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+
+  <h1 class="text-xl sm:text-2xl font-bold text-gray-900">
+    Résultats pour "{{ query }}"
+  </h1>
+  <p class="text-sm text-gray-500 mt-1">
+    {{ resultats.length }} produit(s) trouvé(s)
+  </p>
+
+  <div class="mt-8">
+    <app-product-section
+      title=""
+      [products]="resultats"
+      emptyMessage="Aucun produit ne correspond à votre recherche."
+      containerClass="">
+    </app-product-section>
+  </div>
+
+</div>

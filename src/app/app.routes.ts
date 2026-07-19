@@ -10,12 +10,14 @@ import { Register } from './features/auth/register/register';
 import { Dashboard } from './features/admin/dashboard/dashboard';
 import { CategoryPageComponent } from './features/category-page/category-page';
 import { Categories } from './features/categories/categories';
+import { SearchResults } from './features/search-results/search-results';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'shop', component: ProductList },
   { path: 'categories', component: Categories },
   { path: 'produit/:id', component: ProductDetail },
+  { path: 'recherche', component: SearchResults },
   { path: 'categories/:slug', component: CategoryPageComponent },
   { path: 'categorie/:slug', component: CategoryPageComponent },
   { path: 'panier', component: Cart }, // ← nouvelle ligne

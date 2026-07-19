@@ -11,17 +11,24 @@ import { RouterLink } from '@angular/router';
 import { AddToCartButton } from '../../../../shared/components/add-to-cart-button/add-to-cart-button';
 import { Panier } from '../../../../core/services/panier';
 
+
+
 @Component({
   selector: 'app-product-card',
   standalone: true,
-  imports: [CommonModule, ProductPrice, ProductBadges, ProductRating, FavoriteButton, RouterLink, AddToCartButton],
+  imports: [CommonModule, ProductPrice, ProductBadges, ProductRating, FavoriteButton, AddToCartButton, RouterLink],
   templateUrl: './product-card.html',
   styleUrl: './product-card.css',
 })
 export class ProductCard {
 
+  private panier = inject(Panier);
+
   @Input({ required: true })
   product!: Product;
+
+  @Input()
+  context?: 'nouveau' | 'vedette' | 'promotion';
 
   @Output()
   addToCart = new EventEmitter<Product>();
@@ -29,11 +36,9 @@ export class ProductCard {
   @Output()
   toggleFavorite = new EventEmitter<Product>();
 
-  private panier = inject(Panier);
-
- onAddToCart() {
-    this.panier.ajouter(this.product); // ← vraie logique
-    this.addToCart.emit(this.product); // ← on garde l'event pour compatibilité
+  onAddToCart() {
+    this.panier.ajouter(this.product);
+    this.addToCart.emit(this.product);
   }
 
   onFavorite() {
@@ -61,6 +66,14 @@ export class ProductCard {
   }
 
   get badges() {
+    if (ProductUtils.hasPromotion(this.product)) {
+      return [ProductUtils.getBadgePromotion(this.product)];
+    }
+
+    if (this.context) {
+      return [];
+    }
+
     return ProductUtils.getBadges(this.product);
   }
 

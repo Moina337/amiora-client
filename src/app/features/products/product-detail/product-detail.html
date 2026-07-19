@@ -46,9 +46,19 @@
           </app-product-price>
         </div>
 
-        <p class="mt-5 text-sm sm:text-base text-gray-600 leading-relaxed">
-          {{ product.description }}
-        </p>
+        <div class="mt-5">
+  <p class="text-sm sm:text-base text-gray-600 leading-relaxed"
+    [class.line-clamp-3]="!descriptionEtendue">
+    {{ product.description }}
+  </p>
+
+  @if (product.description.length > 150) {
+    <button (click)="descriptionEtendue = !descriptionEtendue"
+      class="mt-1 text-sm font-medium text-amber-600 hover:text-amber-700 transition">
+      {{ descriptionEtendue ? 'Voir moins' : 'Voir plus' }}
+    </button>
+  }
+</div>
 
         <!-- Quantité -->
         <div class="mt-6 flex items-center gap-4">
@@ -67,10 +77,23 @@
         </div>
 
         <!-- Bouton panier -->
-        <app-add-to-cart-button size="sm"  (addToCart)="onAddToCart()"></app-add-to-cart-button>
+        <div class="mt-6">
+  <app-add-to-cart-button size="lg" (addToCart)="onAddToCart()"></app-add-to-cart-button>
+</div>
       </div>
 
     </div>
+
+    <!-- Produits similaires -->
+    <div class="mt-12 sm:mt-16">
+      <app-product-section
+        title="Produits similaires"
+        subtitle="Vous pourriez aussi aimer"
+        [products]="produitsSimilaires"
+        containerClass="">
+      </app-product-section>
+    </div>
+
   </div>
 } @else {
   <div class="max-w-6xl mx-auto px-4 py-20 text-center text-gray-500">

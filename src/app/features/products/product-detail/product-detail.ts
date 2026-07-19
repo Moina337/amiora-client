@@ -3,20 +3,22 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Product } from '../../../models/product.model';
-import { ProductService } from '../../../core/services/produit';// ← ajuste le chemin si différent
+import { ProductService } from '../../../core/services/produit';
 import { ProductUtils } from '../../../shared/components/utils/product.utils';
+import { Panier } from '../../../core/services/panier'; // ← nouvelle ligne
 
 import { ProductPrice } from '../../../shared/components/product-price/product-price';
 import { ProductRating } from '../../../shared/components/product-rating/product-rating';
 import { ProductBadges } from '../../../shared/components/product-badges/product-badges';
 import { FavoriteButton } from '../../../shared/components/favorite-button/favorite-button';
 import { AddToCartButton } from '../../../shared/components/add-to-cart-button/add-to-cart-button';
-import { Breadcrumb, BreadcrumbItem } from '../../../shared/components/breadcrumb/breadcrumb'; 
+import { Breadcrumb, BreadcrumbItem } from '../../../shared/components/breadcrumb/breadcrumb';
+import { ProductSectionComponent } from '../../../shared/components/product-section/product-section'; // ← nouvelle ligne
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [CommonModule, ProductPrice, ProductRating, ProductBadges, FavoriteButton, AddToCartButton,Breadcrumb],
+  imports: [CommonModule, ProductPrice, ProductRating, ProductBadges, FavoriteButton, AddToCartButton, Breadcrumb, ProductSectionComponent], // ← ajouté
   templateUrl: './product-detail.html',
   styleUrl: './product-detail.css',
 })
@@ -24,6 +26,8 @@ export class ProductDetail {
 
   private route = inject(ActivatedRoute);
   private productService = inject(ProductService);
+  private panier = inject(Panier); // ← nouvelle ligne
+  descriptionEtendue = false;
 
   product?: Product;
   quantite = 1;
@@ -56,6 +60,11 @@ export class ProductDetail {
     return this.product ? ProductUtils.getBadges(this.product) : [];
   }
 
+  get produitsSimilaires(): Product[] { // ← nouveau getter
+    if (!this.product) return [];
+    return this.productService.getSimilarProducts(this.product);
+  }
+
   increaseQuantite() {
     this.quantite++;
   }
@@ -68,8 +77,7 @@ export class ProductDetail {
 
   onAddToCart() {
     if (this.product) {
-      console.log('Ajouté au panier :', this.product, 'quantité :', this.quantite);
-      // TODO: brancher ton vrai service panier ici
+      this.panier.ajouter(this.product, this.quantite); // ← vraie logique au lieu du console.log
     }
   }
 
