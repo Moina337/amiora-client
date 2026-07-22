@@ -9,8 +9,26 @@
                 <app-footer-brand></app-footer-brand>
 
             </div>
-
+          
             <!-- Les autres composants viendront ici -->
+             <div class="grid grid-cols-1 sm:grid-cols-3 gap-10 lg:col-span-3">
+
+    <app-footer-links
+        title="Boutique"
+        [links]="boutiqueLinks">
+    </app-footer-links>
+
+    <app-footer-links
+        title="Aide"
+        [links]="helpLinks">
+    </app-footer-links>
+
+    <app-footer-links
+        title="Entreprise"
+        [links]="companyLinks">
+    </app-footer-links>
+
+</div>
 
         </div>
 
