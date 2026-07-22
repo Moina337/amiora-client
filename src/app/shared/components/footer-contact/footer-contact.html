@@ -1,0 +1,96 @@
+<div>
+
+    <h3 class="text-white font-semibold text-lg mb-5">
+
+        Contact
+
+    </h3>
+
+    <div class="space-y-4">
+
+        <!-- Adresse -->
+
+        <div class="flex items-start gap-3">
+
+            <span class="text-amber-400 text-lg">
+
+                📍
+
+            </span>
+
+            <div>
+
+                <p class="text-sm text-gray-300">
+
+                    {{ address }}
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- Téléphone -->
+
+        <div class="flex items-start gap-3">
+
+            <span class="text-amber-400 text-lg">
+
+                📞
+
+            </span>
+
+            <a
+                [href]="'tel:' + phone"
+                class="text-sm text-gray-300 hover:text-amber-400 transition">
+
+                {{ phone }}
+
+            </a>
+
+        </div>
+
+        <!-- Email -->
+
+        <div class="flex items-start gap-3">
+
+            <span class="text-amber-400 text-lg">
+
+                ✉️
+
+            </span>
+
+            <a
+                [href]="'mailto:' + email"
+                class="text-sm text-gray-300 hover:text-amber-400 transition">
+
+                {{ email }}
+
+            </a>
+
+        </div>
+
+        <!-- WhatsApp -->
+
+        <div class="flex items-start gap-3">
+
+            <span class="text-amber-400 text-lg">
+
+                💬
+
+            </span>
+
+            <a
+                [href]="'https://wa.me/' + whatsapp"
+                target="_blank"
+                class="text-sm text-gray-300 hover:text-green-400 transition">
+
+                Nous contacter sur WhatsApp
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
