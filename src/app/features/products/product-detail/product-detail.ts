@@ -14,11 +14,14 @@ import { FavoriteButton } from '../../../shared/components/favorite-button/favor
 import { AddToCartButton } from '../../../shared/components/add-to-cart-button/add-to-cart-button';
 import { Breadcrumb, BreadcrumbItem } from '../../../shared/components/breadcrumb/breadcrumb';
 import { ProductSectionComponent } from '../../../shared/components/product-section/product-section'; // ← nouvelle ligne
+ import { VendeurService } from '../../../core/services/vendeur';
+ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [CommonModule, ProductPrice, ProductRating, ProductBadges, FavoriteButton, AddToCartButton, Breadcrumb, ProductSectionComponent], // ← ajouté
+  imports: [CommonModule, ProductPrice, ProductRating, ProductBadges, FavoriteButton, 
+    AddToCartButton, Breadcrumb, ProductSectionComponent, RouterLink ], 
   templateUrl: './product-detail.html',
   styleUrl: './product-detail.css',
 })
@@ -27,6 +30,12 @@ export class ProductDetail {
   private route = inject(ActivatedRoute);
   private productService = inject(ProductService);
   private panier = inject(Panier); // ← nouvelle ligne
+ 
+
+// dans la classe :
+private vendeurService = inject(VendeurService);
+
+
   descriptionEtendue = false;
 
   product?: Product;
@@ -37,7 +46,10 @@ export class ProductDetail {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.product = this.productService.getById(id);
   }
-
+   
+  get vendeur() {
+  return this.product ? this.vendeurService.getById(this.product.vendeurId) : undefined;
+}
   get breadcrumbItems(): BreadcrumbItem[] {
     if (!this.product) return [];
 

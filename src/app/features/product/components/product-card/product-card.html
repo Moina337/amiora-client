@@ -18,8 +18,15 @@
   <div class="p-3 sm:p-4">
     <p class="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400">{{ product.categorie }}</p>
 
-    <h3 class="mt-1 text-sm sm:text-base font-semibold text-gray-900 line-clamp-1">{{ product.nom }}</h3>
+  
+     <h3 class="mt-1 text-sm sm:text-base font-semibold text-gray-900 line-clamp-1">{{ product.nom }}</h3>
 
+@if (vendeur) {
+  <a [routerLink]="['/boutique', vendeur.slug]" (click)="$event.stopPropagation()"
+    class="text-[10px] sm:text-xs text-gray-400 hover:text-amber-600 transition">
+    {{ vendeur.nom }}
+  </a>
+}
     <div class="mt-1">
       <app-product-rating [nombreAvis]="24" size="sm"></app-product-rating>
     </div>

@@ -10,6 +10,7 @@ import { FavoriteButton } from '../../../../shared/components/favorite-button/fa
 import { RouterLink } from '@angular/router';
 import { AddToCartButton } from '../../../../shared/components/add-to-cart-button/add-to-cart-button';
 import { Panier } from '../../../../core/services/panier';
+import { VendeurService } from '../../../../core/services/vendeur';
 
 
 
@@ -24,6 +25,8 @@ export class ProductCard {
 
   private panier = inject(Panier);
 
+  private vendeurService = inject(VendeurService); // ← avec les autres inject()
+
   @Input({ required: true })
   product!: Product;
 
@@ -35,6 +38,11 @@ export class ProductCard {
 
   @Output()
   toggleFavorite = new EventEmitter<Product>();
+
+   
+get vendeur() {
+  return this.vendeurService.getById(this.product.vendeurId);
+}
 
   onAddToCart() {
     this.panier.ajouter(this.product);
