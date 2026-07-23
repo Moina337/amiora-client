@@ -11,11 +11,13 @@ import { Dashboard } from './features/admin/dashboard/dashboard';
 import { CategoryPageComponent } from './features/category-page/category-page';
 import { Categories } from './features/categories/categories';
 import { SearchResults } from './features/search-results/search-results';
+import { BoutiqueDetail } from './features/boutique/boutique-detail/boutique-detail';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'shop', component: ProductList },
   { path: 'categories', component: Categories },
+  { path: 'boutique/:slug', component: BoutiqueDetail },
   { path: 'produit/:id', component: ProductDetail },
   { path: 'recherche', component: SearchResults },
   { path: 'categories/:slug', component: CategoryPageComponent },

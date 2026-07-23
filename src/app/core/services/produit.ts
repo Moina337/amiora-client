@@ -49,4 +49,8 @@ getSimilarProducts(product: Product, limit: number = 4): Product[] {
     .slice(0, limit);
 }
 
+getByVendeur(vendeurId: number): Product[] {
+  return PRODUCTS_MOCK.filter(p => p.vendeurId === vendeurId);
+}
+
 }

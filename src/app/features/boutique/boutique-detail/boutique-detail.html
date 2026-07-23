@@ -1,0 +1,39 @@
+@if (vendeur) {
+  <div>
+
+    <!-- Bannière boutique -->
+    <div class="bg-gray-100 border-b border-gray-200">
+      <div class="max-w-6xl mx-auto px-4 py-8 sm:py-12 flex items-center gap-4 sm:gap-6">
+
+        <img [src]="vendeur.logoUrl" [alt]="vendeur.nom"
+          class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-2 border-white shadow-sm flex-shrink-0">
+
+        <div class="min-w-0">
+          <h1 class="text-xl sm:text-2xl font-bold text-gray-900">{{ vendeur.nom }}</h1>
+          @if (vendeur.ville) {
+            <p class="text-sm text-gray-500 mt-1">📍 {{ vendeur.ville }}</p>
+          }
+          @if (vendeur.description) {
+            <p class="text-sm text-gray-600 mt-2 max-w-xl">{{ vendeur.description }}</p>
+          }
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Produits de la boutique -->
+    <div class="max-w-6xl mx-auto px-4 py-8 sm:py-12">
+      <app-product-section
+        title="Produits de {{ vendeur.nom }}"
+        [products]="produits"
+        emptyMessage="Cette boutique n'a pas encore de produits."
+        containerClass="">
+      </app-product-section>
+    </div>
+
+  </div>
+} @else {
+  <div class="max-w-6xl mx-auto px-4 py-20 text-center text-gray-500">
+    Boutique introuvable.
+  </div>
+}
