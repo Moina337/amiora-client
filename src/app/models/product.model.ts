@@ -22,4 +22,6 @@ export interface Product {
 
   dateCreation: Date;
 
+  vendeurId: number;
+
 }

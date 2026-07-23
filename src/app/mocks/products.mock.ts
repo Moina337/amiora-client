@@ -12,7 +12,8 @@ export const PRODUCTS_MOCK: Product[] = [
     categorie: "Mode",
     estEnVedette: true,
     nombreVentes: 120,
-    dateCreation: new Date("2026-06-01")
+    dateCreation: new Date("2026-06-01"),
+    vendeurId: 1
   },
   {
     id: 2,
@@ -25,7 +26,8 @@ export const PRODUCTS_MOCK: Product[] = [
     categorie: "Tech",
     estEnVedette: true,
     nombreVentes: 80,
-    dateCreation: new Date("2026-05-25")
+    dateCreation: new Date("2026-05-25"),
+    vendeurId: 2
   },
   {
     id: 3,
@@ -37,7 +39,8 @@ export const PRODUCTS_MOCK: Product[] = [
     categorie: "Mode",
     estEnVedette: false,
     nombreVentes: 210,
-    dateCreation: new Date("2026-06-15")
+    dateCreation: new Date("2026-06-15"), 
+    vendeurId: 1
   },
   {
     id: 4,
@@ -50,7 +53,8 @@ export const PRODUCTS_MOCK: Product[] = [
     categorie: "Tech",
     estEnVedette: true,
     nombreVentes: 45,
-    dateCreation: new Date("2026-04-12")
+    dateCreation: new Date("2026-04-12"),
+    vendeurId: 2
   },
   {
     id: 5,
@@ -62,7 +66,8 @@ export const PRODUCTS_MOCK: Product[] = [
     categorie: "Accessoires",
     estEnVedette: false,
     nombreVentes: 60,
-    dateCreation: new Date("2026-06-20")
+    dateCreation: new Date("2026-06-20"),
+    vendeurId: 2
   },
   {
     id: 6,
@@ -75,6 +80,7 @@ export const PRODUCTS_MOCK: Product[] = [
     categorie: "Mode",
     estEnVedette: true,
     nombreVentes: 180,
-    dateCreation: new Date("2026-06-22")
+    dateCreation: new Date("2026-06-22"),
+    vendeurId: 1
   }
 ];
