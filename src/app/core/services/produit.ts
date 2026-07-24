@@ -53,4 +53,17 @@ getByVendeur(vendeurId: number): Product[] {
   return PRODUCTS_MOCK.filter(p => p.vendeurId === vendeurId);
 }
 
+ajouter(produit: Omit<Product, 'id' | 'dateCreation' | 'nombreVentes'>): Product {
+  const nouveauProduit: Product = {
+    ...produit,
+    id: Date.now(),
+    dateCreation: new Date(),
+    nombreVentes: 0,
+  };
+
+  PRODUCTS_MOCK.push(nouveauProduit);
+
+  return nouveauProduit;
+}
+
 }

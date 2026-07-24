@@ -1,0 +1,87 @@
+<div class="max-w-2xl mx-auto px-4 py-8 sm:py-10">
+
+  <h1 class="text-2xl font-bold text-gray-900 mb-6">
+    Ajouter un produit
+  </h1>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="bg-white rounded-2xl border border-gray-200 p-6 space-y-4">
+
+    <div>
+      <label class="block text-sm font-medium mb-1.5">Nom du produit *</label>
+      <input type="text" formControlName="nom"
+        class="w-full rounded-xl border border-gray-300 px-4 py-2.5 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+      @if (form.get('nom')?.invalid && form.get('nom')?.touched) {
+        <p class="text-xs text-red-500 mt-1">Le nom est requis.</p>
+      }
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium mb-1.5">Description *</label>
+      <textarea rows="3" formControlName="description"
+        class="w-full rounded-xl border border-gray-300 px-4 py-2.5 text-sm resize-none focus:ring-2 focus:ring-amber-500 outline-none">
+      </textarea>
+      @if (form.get('description')?.invalid && form.get('description')?.touched) {
+        <p class="text-xs text-red-500 mt-1">La description est requise.</p>
+      }
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <label class="block text-sm font-medium mb-1.5">Prix (FC) *</label>
+        <input type="number" formControlName="prix"
+          class="w-full rounded-xl border border-gray-300 px-4 py-2.5 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+        @if (form.get('prix')?.invalid && form.get('prix')?.touched) {
+          <p class="text-xs text-red-500 mt-1">Prix valide requis.</p>
+        }
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium mb-1.5">Prix promo (optionnel)</label>
+        <input type="number" formControlName="prixPromotion"
+          class="w-full rounded-xl border border-gray-300 px-4 py-2.5 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+      </div>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium mb-1.5">URL de l'image *</label>
+      <input type="text" formControlName="imageUrl" placeholder="https://..."
+        class="w-full rounded-xl border border-gray-300 px-4 py-2.5 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+      @if (form.get('imageUrl')?.invalid && form.get('imageUrl')?.touched) {
+        <p class="text-xs text-red-500 mt-1">L'image est requise.</p>
+      }
+    </div>
+
+    <!-- Grille ajoutée pour aligner la Catégorie et la Quantité -->
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <label class="block text-sm font-medium mb-1.5">Catégorie *</label>
+        <input type="text" formControlName="categorie" placeholder="Ex : Mode, Tech..."
+          class="w-full rounded-xl border border-gray-300 px-4 py-2.5 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+        @if (form.get('categorie')?.invalid && form.get('categorie')?.touched) {
+          <p class="text-xs text-red-500 mt-1">La catégorie est requise.</p>
+        }
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium mb-1.5">Quantité en stock *</label>
+        <input type="number" formControlName="quantite"
+          class="w-full rounded-xl border border-gray-300 px-4 py-2.5 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+        @if (form.get('quantite')?.invalid && form.get('quantite')?.touched) {
+          <p class="text-xs text-red-500 mt-1">Une quantité valide (≥ 0) est requise.</p>
+        }
+      </div>
+    </div>
+
+    <label class="flex items-center gap-2 text-sm">
+      <input type="checkbox" formControlName="estEnVedette" class="rounded border-gray-300">
+      Mettre ce produit en vedette
+    </label>
+
+    <button type="submit"
+      class="w-full rounded-xl bg-amber-500 text-white py-3 font-semibold hover:bg-amber-600 transition">
+      Publier le produit
+    </button>
+
+  </form>
+
+</div>

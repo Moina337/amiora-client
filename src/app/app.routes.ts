@@ -14,6 +14,7 @@ import { SearchResults } from './features/search-results/search-results';
 import { BoutiqueDetail } from './features/boutique/boutique-detail/boutique-detail';
 import { VendeurInscription } from './features/vendeur/vendeur-inscription/vendeur-inscription';
 import { VendeurDashboard } from './features/vendeur/vendeur-dashboard/vendeur-dashboard';
+import { ProduitFormulaire } from './features/vendeur/produit-formulaire/produit-formulaire';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -30,6 +31,7 @@ export const routes: Routes = [
   { path: 'inscription', component: Register },
   { path: 'vendeur/inscription', component: VendeurInscription },
   { path: 'vendeur/dashboard', component: VendeurDashboard },
+  { path: 'vendeur/produits/nouveau', component: ProduitFormulaire },
   { path: 'admin', component: Dashboard },
   { path: '**', redirectTo: '' },
 ];
