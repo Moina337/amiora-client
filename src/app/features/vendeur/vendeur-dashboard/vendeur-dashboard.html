@@ -1,0 +1,79 @@
+@if (vendeur(); as v) {
+  <div class="max-w-6xl mx-auto px-4 py-8 sm:py-10">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 class="text-2xl font-bold text-gray-900">Bonjour, {{ v.nom }}</h1>
+        <p class="text-sm text-gray-500 mt-1">Voici un aperçu de votre boutique</p>
+      </div>
+      <button (click)="deconnecter()"
+        class="text-sm text-gray-500 hover:text-red-500 transition">
+        Déconnexion
+      </button>
+    </div>
+
+    <!-- Statistiques -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
+
+      <div class="bg-white rounded-2xl border border-gray-200 p-5">
+        <p class="text-xs text-gray-400 uppercase tracking-wider">Produits</p>
+        <p class="text-2xl font-bold text-gray-900 mt-1">{{ produits.length }}</p>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-gray-200 p-5">
+        <p class="text-xs text-gray-400 uppercase tracking-wider">Ventes totales</p>
+        <p class="text-2xl font-bold text-gray-900 mt-1">{{ totalVentes }}</p>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-gray-200 p-5 col-span-2 sm:col-span-1">
+        <p class="text-xs text-gray-400 uppercase tracking-wider">Chiffre d'affaires</p>
+        <p class="text-2xl font-bold text-amber-600 mt-1">{{ chiffreAffaires | number }} FC</p>
+      </div>
+
+    </div>
+
+    <!-- Liste des produits -->
+    <div class="bg-white rounded-2xl border border-gray-200">
+
+      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100">
+        <h2 class="font-semibold text-gray-900">Mes produits</h2>
+        <a routerLink="/vendeur/produits/nouveau"
+          class="text-sm font-medium bg-amber-500 text-white px-4 py-2 rounded-xl hover:bg-amber-600 transition">
+          + Ajouter un produit
+        </a>
+      </div>
+
+      @if (produits.length === 0) {
+        <div class="text-center py-12 text-gray-400 text-sm">
+          Vous n'avez pas encore de produit. Ajoutez-en un pour commencer à vendre.
+        </div>
+      } @else {
+        <div class="divide-y divide-gray-100">
+          @for (produit of produits; track produit.id) {
+            <div class="flex items-center gap-4 px-5 py-3">
+              <img [src]="produit.imageUrl" [alt]="produit.nom" class="w-12 h-12 rounded-lg object-cover flex-shrink-0">
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-gray-900 line-clamp-1">{{ produit.nom }}</p>
+                <p class="text-xs text-gray-400">{{ produit.nombreVentes }} ventes</p>
+              </div>
+              <p class="text-sm font-semibold text-gray-900 flex-shrink-0">
+                {{ produit.prixPromotion ?? produit.prix | number }} FC
+              </p>
+            </div>
+          }
+        </div>
+      }
+
+    </div>
+
+  </div>
+} @else {
+  <div class="max-w-6xl mx-auto px-4 py-20 text-center text-gray-500">
+    <p class="mb-4">Vous devez d'abord créer votre boutique.</p>
+    <a routerLink="/vendeur/inscription"
+      class="inline-block rounded-xl bg-amber-500 text-white px-6 py-3 font-semibold hover:bg-amber-600 transition">
+      Créer ma boutique
+    </a>
+  </div>
+}

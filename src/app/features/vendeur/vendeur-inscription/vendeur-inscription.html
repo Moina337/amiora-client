@@ -1,0 +1,44 @@
+<div class="max-w-lg mx-auto px-4 py-10 sm:py-16">
+
+  <div class="text-center mb-8">
+    <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">
+      Devenez vendeur sur <span class="text-amber-500">Ami<span class="text-gray-900">ora</span></span>
+    </h1>
+    <p class="text-sm text-gray-500 mt-2">
+      Créez votre boutique et commencez à vendre en quelques minutes.
+    </p>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="bg-white rounded-2xl border border-gray-200 p-6 space-y-4">
+
+    <div>
+      <label class="block text-sm font-medium mb-1.5">Nom de la boutique *</label>
+      <input type="text" formControlName="nom"
+        class="w-full rounded-xl border border-gray-300 px-4 py-2.5 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+      @if (form.get('nom')?.invalid && form.get('nom')?.touched) {
+        <p class="text-xs text-red-500 mt-1">Le nom de la boutique est requis.</p>
+      }
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium mb-1.5">Ville</label>
+      <input type="text" formControlName="ville"
+        class="w-full rounded-xl border border-gray-300 px-4 py-2.5 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium mb-1.5">Description de votre boutique</label>
+      <textarea rows="3" formControlName="description"
+        placeholder="Ex : Vente de vêtements et accessoires tendance..."
+        class="w-full rounded-xl border border-gray-300 px-4 py-2.5 text-sm resize-none focus:ring-2 focus:ring-amber-500 outline-none">
+      </textarea>
+    </div>
+
+    <button type="submit"
+      class="w-full rounded-xl bg-amber-500 text-white py-3 font-semibold hover:bg-amber-600 transition">
+      Créer ma boutique
+    </button>
+
+  </form>
+
+</div>
